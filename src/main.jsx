@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './components/App/App.jsx';
-// 1. Імпортуємо провайдер
-import { Provider } from 'react-redux'
-// 2. Імпортуємо створений раніше стор
-import { store } from "./redux/store.js";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { Provider } from "react-redux";
+import { persistor, store } from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
+import App from "./components/App/App.jsx";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-	  <Provider store={store}>
-	    <App />
-	  </Provider>
+    <Provider store={store}>
+      <PersistGate persistor={persistor} loading={null}>
+        <App />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
